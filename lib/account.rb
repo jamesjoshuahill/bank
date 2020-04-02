@@ -1,5 +1,9 @@
 class Account
+  def initialize(statement_printer)
+    @statement_printer = statement_printer
+  end
+
   def print_statement
-    "date || credit || debit || balance"
+    @statement_printer.print([])
   end
 end
