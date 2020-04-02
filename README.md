@@ -25,3 +25,26 @@ date || credit || debit || balance
 13/01/2012 || 2000.00 || || 3000.00
 10/01/2012 || 1000.00 || || 1000.00
 ```
+
+---
+
+## Pre-requisites
+
+- Ruby 2.7.0
+- Bundler 2
+
+## Get started
+
+1. Clone this repository
+1. Install dependencies
+    ```bash
+    bundle install
+    ```
+1. Run the Ruby linter
+    ```bash
+    bundle exec rubocop
+    ```
+1. Run the tests and check coverage
+    ```bash
+    bundle exec rspec
+    ```
