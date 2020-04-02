@@ -1,0 +1,28 @@
+# This is the DotUML script used to generate the class diagram image
+# in the DotUML playground.
+#
+# https://dotuml.com/playground.html
+
+ClassDiagram [frame=true framecolor=steelblue label="Bank"] {
+  class Account {
+    private transactions: Array
+	  private printer: StatementPrinter
+
+	  public deposit(amount:Integer, date: Date)
+	  public withdraw(amount:Integer, date: Date)
+	  public print_statement()
+  }
+
+  class Transaction {
+    public date: Date
+	  public credit: Integer
+    public debit: Integer
+  }
+
+  class StatementPrinter {
+    public print(transactions: Array)
+  }
+
+  Account --> Transaction;
+	Account --> StatementPrinter;
+}

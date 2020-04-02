@@ -48,3 +48,9 @@ date || credit || debit || balance
     ```bash
     bundle exec rspec
     ```
+
+## Domain model
+
+A class diagram was drawn to model the domain in the [DotUML Playground](https://dotuml.com/playground.html).
+
+![class diagram](./docs/class_diagram.png)
