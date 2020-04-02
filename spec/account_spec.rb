@@ -19,4 +19,21 @@ RSpec.describe Account do
       credit: 1000
     }])
   end
+
+  it "can deposit twice" do
+    subject.deposit(1000, Date.new(2012, 1, 10))
+    subject.deposit(2000, Date.new(2012, 1, 13))
+
+    subject.print_statement
+    expect(statement_printer).to have_received(:print).with([
+      {
+        date: Date.new(2012, 1, 10),
+        credit: 1000
+      },
+      {
+        date: Date.new(2012, 1, 13),
+        credit: 2000
+      }
+    ])
+  end
 end
