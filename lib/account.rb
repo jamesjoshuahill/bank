@@ -11,4 +11,8 @@ class Account
   def deposit(amount, date)
     @transactions.push({ date: date, credit: amount })
   end
+
+  def withdraw(amount, date)
+    @transactions.push({ date: date, debit: amount })
+  end
 end

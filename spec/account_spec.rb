@@ -36,4 +36,21 @@ RSpec.describe Account do
       }
     ])
   end
+
+  it "can withdraw an amount" do
+    subject.deposit(1000, Date.new(2012, 1, 10))
+    subject.withdraw(500, Date.new(2012, 1, 14))
+
+    subject.print_statement
+    expect(statement_printer).to have_received(:print).with([
+      {
+        date: Date.new(2012, 1, 10),
+        credit: 1000
+      },
+      {
+        date: Date.new(2012, 1, 14),
+        debit: 500
+      }
+    ])
+  end
 end
