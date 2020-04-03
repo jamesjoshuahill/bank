@@ -1,8 +1,11 @@
+require "transaction"
+
 class Account
   class InsufficientFundsError < StandardError; end
 
-  def initialize(statement_printer)
+  def initialize(statement_printer, transaction_class = Transaction)
     @statement_printer = statement_printer
+    @transaction_class = transaction_class
     @transactions = []
   end
 
@@ -12,19 +15,19 @@ class Account
 
   def deposit(amount, date)
     balance = current_balance + amount
-    @transactions.push({ date: date, credit: amount, balance: balance })
+    @transactions.push(@transaction_class.new(date: date, credit: amount, balance: balance))
   end
 
   def withdraw(amount, date)
     balance = current_balance - amount
     raise InsufficientFundsError if balance.negative?
 
-    @transactions.push({ date: date, debit: amount, balance: balance })
+    @transactions.push(@transaction_class.new(date: date, debit: amount, balance: balance))
   end
 
   private
 
   def current_balance
-    @transactions.any? ? @transactions.last.fetch(:balance) : 0
+    @transactions.any? ? @transactions.last.balance : 0
   end
 end

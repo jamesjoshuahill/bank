@@ -3,10 +3,10 @@ class StatementPrinter
     puts "date || credit || debit || balance"
 
     transactions.reverse_each do |transaction|
-      date = transaction.fetch(:date).strftime("%d/%m/%Y")
-      credit = format_transfer(transaction.fetch(:credit, 0))
-      debit = format_transfer(transaction.fetch(:debit, 0))
-      balance = format_amount(transaction.fetch(:balance))
+      date = transaction.date.strftime("%d/%m/%Y")
+      credit = format_transfer(transaction.credit)
+      debit = format_transfer(transaction.debit)
+      balance = format_amount(transaction.balance)
 
       puts [date, credit, debit, balance].join(" ||")
     end
