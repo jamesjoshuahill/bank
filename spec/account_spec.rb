@@ -40,7 +40,7 @@ RSpec.describe Account do
     ])
   end
 
-  it "can withdraw an amount" do
+  it "can withdraw less than the balance" do
     subject.deposit(2000, Date.new(2012, 1, 13))
     subject.withdraw(500, Date.new(2012, 1, 14))
 
@@ -57,5 +57,10 @@ RSpec.describe Account do
         balance: 1500
       }
     ])
+  end
+
+  it "fails to withdraw more than the balance" do
+    expect { subject.withdraw(1, Date.new(2012, 1, 10)) }
+      .to raise_error(Account::InsufficientFundsError)
   end
 end

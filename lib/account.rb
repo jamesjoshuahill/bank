@@ -1,4 +1,6 @@
 class Account
+  class InsufficientFundsError < StandardError; end
+
   def initialize(statement_printer)
     @statement_printer = statement_printer
     @transactions = []
@@ -15,6 +17,8 @@ class Account
 
   def withdraw(amount, date)
     balance = current_balance - amount
+    raise InsufficientFundsError if balance.negative?
+
     @transactions.push({ date: date, debit: amount, balance: balance })
   end
 
