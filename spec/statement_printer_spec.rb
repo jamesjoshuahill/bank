@@ -5,6 +5,8 @@ RSpec.describe StatementPrinter do
   it "can print an empty statement" do
     expect { subject.print([]) }
       .to output("date || credit || debit || balance\n").to_stdout
+
+    expect(subject.print([])).to be_nil
   end
 
   it "can print a deposit" do

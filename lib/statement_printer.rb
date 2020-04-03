@@ -10,6 +10,8 @@ class StatementPrinter
 
       puts [date, credit, debit, balance].join(" ||")
     end
+
+    return
   end
 
   private
