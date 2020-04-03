@@ -7,7 +7,10 @@ RSpec.describe StatementPrinter do
   end
 
   it "can print a deposit" do
-    transactions = [{ date: Date.new(2012, 1, 10), credit: 1000 }]
+    transactions = [
+      { date: Date.new(2012, 1, 10), credit: 1000, balance: 1000 }
+    ]
+
     expect { subject.print(transactions) }
       .to output(<<~STATEMENT
       date || credit || debit || balance
