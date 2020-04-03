@@ -46,4 +46,17 @@ RSpec.describe StatementPrinter do
       STATEMENT
       ).to_stdout
   end
+
+  it "can print a zero balance" do
+    transactions = [
+      { date: Date.new(2012, 1, 14), debit: 500, balance: 0 },
+    ]
+
+    expect { subject.print(transactions) }
+      .to output(<<~STATEMENT
+      date || credit || debit || balance
+      14/01/2012 || || 500.00 || 0.00
+      STATEMENT
+      ).to_stdout
+  end
 end

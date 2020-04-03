@@ -4,8 +4,8 @@ class StatementPrinter
 
     transactions.reverse_each do |transaction|
       date = transaction.fetch(:date).strftime("%d/%m/%Y")
-      credit = format_amount(transaction.fetch(:credit, 0))
-      debit = format_amount(transaction.fetch(:debit, 0))
+      credit = format_transfer(transaction.fetch(:credit, 0))
+      debit = format_transfer(transaction.fetch(:debit, 0))
       balance = format_amount(transaction.fetch(:balance))
 
       puts [date, credit, debit, balance].join(" ||")
@@ -14,9 +14,13 @@ class StatementPrinter
 
   private
 
-  def format_amount(amount)
+  def format_transfer(amount)
     return "" if amount.zero?
 
+    format_amount(amount)
+  end
+
+  def format_amount(amount)
     " %<amount>.2f" % { amount: amount }
   end
 end
