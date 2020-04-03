@@ -9,10 +9,18 @@ class Account
   end
 
   def deposit(amount, date)
-    @transactions.push({ date: date, credit: amount })
+    balance = current_balance + amount
+    @transactions.push({ date: date, credit: amount, balance: balance })
   end
 
   def withdraw(amount, date)
-    @transactions.push({ date: date, debit: amount })
+    balance = current_balance - amount
+    @transactions.push({ date: date, debit: amount, balance: balance })
+  end
+
+  private
+
+  def current_balance
+    @transactions.any? ? @transactions.last.fetch(:balance) : 0
   end
 end
