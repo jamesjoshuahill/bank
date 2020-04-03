@@ -16,19 +16,30 @@ class Account
 
   def deposit(amount, date)
     balance = current_balance + amount
-    @transactions.push(@transaction_class.new(date: date, credit: amount, balance: balance))
+    record_transaction(date: date, credit: amount, balance: balance)
   end
 
   def withdraw(amount, date)
     balance = current_balance - amount
     raise InsufficientFundsError if balance.negative?
 
-    @transactions.push(@transaction_class.new(date: date, debit: amount, balance: balance))
+    record_transaction(date: date, debit: amount, balance: balance)
   end
 
   private
 
   def current_balance
     @transactions.any? ? @transactions.last.balance : 0
+  end
+
+  def record_transaction(date:, credit: 0, debit: 0, balance:)
+    transaction = @transaction_class.new(
+      date: date,
+      credit: credit,
+      debit: debit,
+      balance: balance
+    )
+    @transactions.push(transaction)
+    return transaction
   end
 end

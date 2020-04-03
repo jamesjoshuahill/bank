@@ -60,9 +60,9 @@ irb(main):002:0> require './lib/account'
 => true
 irb(main):003:0> account = Account.new
 irb(main):004:0> account.deposit(1000, Date.new(2012, 1, 10))
-=> [#<Transaction:0x00007f99b92d6630 @date=#<Date: 2012-01-10 ((2455937j,0s,0n),+0s,2299161j)>, @credit=1000, @debit=0, @balance=1000>]
+=> #<Transaction:0x00007f99b92d6630 @date=#<Date: 2012-01-10 ((2455937j,0s,0n),+0s,2299161j)>, @credit=1000, @debit=0, @balance=1000>
 irb(main):005:0> account.withdraw(500, Date.new(2012, 1, 12))
-=> [#<Transaction:0x00007f99b92d6630 @date=#<Date: 2012-01-10 ((2455937j,0s,0n),+0s,2299161j)>, @credit=1000, @debit=0, @balance=1000>, #<Transaction:0x00007f99b9326888 @date=#<Date: 2012-01-12 ((2455939j,0s,0n),+0s,2299161j)>, @credit=0, @debit=500, @balance=500>]
+=> #<Transaction:0x00007f99b9326888 @date=#<Date: 2012-01-12 ((2455939j,0s,0n),+0s,2299161j)>, @credit=0, @debit=500, @balance=500>
 irb(main):006:0> account.print_statement
 date || credit || debit || balance
 12/01/2012 || || 500.00 || 500.00

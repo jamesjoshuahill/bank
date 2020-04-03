@@ -14,11 +14,12 @@ RSpec.describe Account do
   it "can deposit an amount" do
     deposit = instance_double(Transaction)
     allow(transaction_class).to receive(:new)
-      .with(date: Date.new(2012, 1, 10), credit: 1000, balance: 1000)
+      .with(date: Date.new(2012, 1, 10), credit: 1000, debit: 0, balance: 1000)
       .and_return(deposit)
 
-    subject.deposit(1000, Date.new(2012, 1, 10))
+    transaction = subject.deposit(1000, Date.new(2012, 1, 10))
 
+    expect(transaction).to eq(deposit)
     subject.print_statement
     expect(statement_printer).to have_received(:print).with([deposit])
   end
@@ -40,12 +41,13 @@ RSpec.describe Account do
     allow(transaction_class).to receive(:new).and_return(deposit)
     withdrawal = instance_double(Transaction)
     allow(transaction_class).to receive(:new)
-      .with(date: Date.new(2012, 1, 14), debit: 500, balance: 1500)
+      .with(date: Date.new(2012, 1, 14), credit: 0, debit: 500, balance: 1500)
       .and_return(withdrawal)
 
     subject.deposit(2000, Date.new(2012, 1, 13))
-    subject.withdraw(500, Date.new(2012, 1, 14))
+    transaction = subject.withdraw(500, Date.new(2012, 1, 14))
 
+    expect(transaction).to eq(withdrawal)
     subject.print_statement
     expect(statement_printer).to have_received(:print).with([deposit, withdrawal])
   end
