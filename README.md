@@ -54,18 +54,21 @@ Here is an example of how to use the bank account in `irb`:
 
 ```ruby
 $ irb
-irb(main):001:0> require 'date'
+irb(main):001:0> require "date"
 => true
-irb(main):002:0> require './lib/account'
+irb(main):002:0> require_relative "lib/account"
 => true
 irb(main):003:0> account = Account.new
 irb(main):004:0> account.deposit(1000, Date.new(2012, 1, 10))
-=> #<Transaction:0x00007f99b92d6630 @date=#<Date: 2012-01-10 ((2455937j,0s,0n),+0s,2299161j)>, @credit=1000, @debit=0, @balance=1000>
-irb(main):005:0> account.withdraw(500, Date.new(2012, 1, 12))
-=> #<Transaction:0x00007f99b9326888 @date=#<Date: 2012-01-12 ((2455939j,0s,0n),+0s,2299161j)>, @credit=0, @debit=500, @balance=500>
-irb(main):006:0> account.print_statement
+=> #<Transaction:0x00007f85fc84d580 @date=#<Date: 2012-01-10 ((2455937j,0s,0n),+0s,2299161j)>, @credit=1000, @debit=0, @balance=1000>
+irb(main):005:0> account.deposit(2000, Date.new(2012, 1, 13))
+=> #<Transaction:0x00007f85fc3aba40 @date=#<Date: 2012-01-13 ((2455940j,0s,0n),+0s,2299161j)>, @credit=2000, @debit=0, @balance=3000>
+irb(main):006:0> account.withdraw(500, Date.new(2012, 1, 14))
+=> #<Transaction:0x00007f85fc2eeb70 @date=#<Date: 2012-01-14 ((2455941j,0s,0n),+0s,2299161j)>, @credit=0, @debit=500, @balance=2500>
+irb(main):007:0> account.print_statement
 date || credit || debit || balance
-12/01/2012 || || 500.00 || 500.00
+14/01/2012 || || 500.00 || 2500.00
+13/01/2012 || 2000.00 || || 3000.00
 10/01/2012 || 1000.00 || || 1000.00
 => nil
 ```
