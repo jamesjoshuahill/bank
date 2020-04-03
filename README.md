@@ -49,6 +49,10 @@ date || credit || debit || balance
     bundle exec rspec
     ```
 
+## Usage
+
+The [bank account feature test](./spec/features/bank_account_spec.rb) shows how to use the code and demonstrates that it satisfies the acceptance criteria.
+
 ## Domain model
 
 A class diagram was drawn to model the domain in the [DotUML Playground](https://dotuml.com/playground.html).
