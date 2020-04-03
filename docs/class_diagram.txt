@@ -17,6 +17,7 @@ ClassDiagram [frame=true framecolor=steelblue label="Bank"] {
     public date: Date
 	  public credit: Integer
     public debit: Integer
+    public balance: Integer
   }
 
   class StatementPrinter {
