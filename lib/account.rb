@@ -1,9 +1,10 @@
-require "transaction"
+require_relative "statement_printer"
+require_relative "transaction"
 
 class Account
   class InsufficientFundsError < StandardError; end
 
-  def initialize(statement_printer, transaction_class = Transaction)
+  def initialize(statement_printer = StatementPrinter.new, transaction_class = Transaction)
     @statement_printer = statement_printer
     @transaction_class = transaction_class
     @transactions = []

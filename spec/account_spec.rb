@@ -1,6 +1,4 @@
 require "account"
-require "statement_printer"
-require "transaction"
 
 RSpec.describe Account do
   let(:statement_printer) { instance_double(StatementPrinter, print: nil) }

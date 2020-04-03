@@ -1,10 +1,8 @@
 require "account"
-require "statement_printer"
 
 RSpec.describe "Bank account" do
   it "can deposit, withdraw and print a statement" do
-    statement_printer = StatementPrinter.new
-    account = Account.new(statement_printer)
+    account = Account.new
 
     account.deposit(1000, Date.new(2012, 1, 10))
     account.deposit(2000, Date.new(2012, 1, 13))
