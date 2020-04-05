@@ -1,6 +1,6 @@
 # Bank
 
-This is a tech test in Ruby to practice object-oriented design and test-driven development skills.
+This is an exercise in Ruby to practice object-oriented design and test-driven development skills.
 
 ## Specification
 
