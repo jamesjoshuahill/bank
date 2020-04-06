@@ -1,7 +1,9 @@
+require "transaction"
+
 class TransactionRepository
-  def initialize(transaction_class)
+  def initialize(transaction_class = Transaction, transactions = [])
     @transaction_class = transaction_class
-    @transactions = []
+    @transactions = transactions
   end
 
   def create(date:, credit: 0, debit: 0, balance:)
@@ -17,5 +19,9 @@ class TransactionRepository
 
   def all
     @transactions
+  end
+
+  def current_balance
+    @transactions.any? ? @transactions.last.balance : 0
   end
 end

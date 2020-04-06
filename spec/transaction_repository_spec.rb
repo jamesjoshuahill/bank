@@ -42,14 +42,32 @@ RSpec.describe TransactionRepository do
     expect(subject.all).to contain_exactly(withdrawal)
   end
 
-  it "can list all transactions" do
-    transaction_1 = instance_double(Transaction)
-    transaction_2 = instance_double(Transaction)
-    allow(transaction_class).to receive(:new).and_return(transaction_1, transaction_2)
+  context "with no transactions" do
+    it "can list all transactions" do
+      expect(subject.all).to be_empty
+    end
 
-    subject.create(date: Date.new(2012, 1, 10), credit: 1000, balance: 1000)
-    subject.create(date: Date.new(2012, 1, 10), credit: 1000, balance: 1000)
+    it "knows the current balance is zero" do
+      expect(subject.current_balance).to be_zero
+    end
+  end
 
-    expect(subject.all).to eq([transaction_1, transaction_2])
+  context "with three transactions" do
+    let(:transactions) {
+      [
+        instance_double(Transaction, balance: 10),
+        instance_double(Transaction, balance: 100),
+        instance_double(Transaction, balance: 1000)
+      ]
+    }
+    subject { described_class.new(transaction_class, transactions) }
+
+    it "can list all transactions" do
+      expect(subject.all).to eq(transactions)
+    end
+
+    it "knows the current balance" do
+      expect(subject.current_balance).to eq(1000)
+    end
   end
 end
