@@ -5,8 +5,9 @@
 
 ClassDiagram [frame=true framecolor=steelblue label="Bank"] {
   class Account {
+	  private statement_printer: StatementPrinter
+		private transaction_class: Transaction
     private transactions: Array
-	  private printer: StatementPrinter
 
 	  public deposit(amount:Integer, date: Date)
 	  public withdraw(amount:Integer, date: Date)
@@ -24,6 +25,7 @@ ClassDiagram [frame=true framecolor=steelblue label="Bank"] {
     public print(transactions: Array)
   }
 
-  Account --> Transaction;
+  Account "  1" --> "
+*" Transaction;
 	Account --> StatementPrinter;
 }
