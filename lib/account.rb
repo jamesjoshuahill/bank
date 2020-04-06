@@ -16,14 +16,13 @@ class Account
   end
 
   def deposit(amount, date)
-    raise InvalidAmountError if amount < 1
-
+    validate_amount(amount)
     balance = current_balance + amount
     create_transaction(date: date, credit: amount, balance: balance)
   end
 
   def withdraw(amount, date)
-    raise InvalidAmountError if amount < 1
+    validate_amount(amount)
     raise InsufficientFundsError if amount > current_balance
 
     balance = current_balance - amount
@@ -34,6 +33,10 @@ class Account
 
   def current_balance
     @transactions.any? ? @transactions.last.balance : 0
+  end
+
+  def validate_amount(amount)
+    raise InvalidAmountError if amount < 1
   end
 
   def create_transaction(date:, credit: 0, debit: 0, balance:)
