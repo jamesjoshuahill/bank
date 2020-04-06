@@ -52,6 +52,26 @@ RSpec.describe Account do
     expect(statement_printer).to have_received(:print).with([deposit, withdrawal])
   end
 
+  it "fails to deposit a zero amount" do
+    expect { subject.deposit(0, Date.new(2012, 1, 10)) }
+      .to raise_error(Account::InvalidAmountError)
+  end
+
+  it "fails to deposit a negative amount" do
+    expect { subject.deposit(-1, Date.new(2012, 1, 10)) }
+      .to raise_error(Account::InvalidAmountError)
+  end
+
+  it "fails to withdraw a zero amount" do
+    expect { subject.withdraw(0, Date.new(2012, 1, 10)) }
+      .to raise_error(Account::InvalidAmountError)
+  end
+
+  it "fails to withdraw a negative amount" do
+    expect { subject.withdraw(-1, Date.new(2012, 1, 10)) }
+      .to raise_error(Account::InvalidAmountError)
+  end
+
   it "fails to withdraw more than the balance" do
     expect { subject.withdraw(1, Date.new(2012, 1, 10)) }
       .to raise_error(Account::InsufficientFundsError)

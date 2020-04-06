@@ -3,6 +3,7 @@ require_relative "transaction"
 
 class Account
   class InsufficientFundsError < StandardError; end
+  class InvalidAmountError < StandardError; end
 
   def initialize(statement_printer = StatementPrinter.new, transaction_class = Transaction)
     @statement_printer = statement_printer
@@ -15,14 +16,17 @@ class Account
   end
 
   def deposit(amount, date)
+    raise InvalidAmountError if amount < 1
+
     balance = current_balance + amount
     create_transaction(date: date, credit: amount, balance: balance)
   end
 
   def withdraw(amount, date)
-    balance = current_balance - amount
-    raise InsufficientFundsError if balance.negative?
+    raise InvalidAmountError if amount < 1
+    raise InsufficientFundsError if amount > current_balance
 
+    balance = current_balance - amount
     create_transaction(date: date, debit: amount, balance: balance)
   end
 
