@@ -22,6 +22,8 @@ class TransactionRepository
   end
 
   def current_balance
-    @transactions.any? ? @transactions.last.balance : 0
+    return 0 if @transactions.empty?
+
+    @transactions.last.balance
   end
 end
