@@ -25,16 +25,6 @@ RSpec.describe Account do
     expect(transaction).to eq(deposit)
   end
 
-  it "can deposit twice" do
-    deposit_1 = instance_double(Transaction)
-    deposit_2 = instance_double(Transaction)
-    allow(transaction_repository).to receive(:create).and_return(deposit_1, deposit_2)
-    allow(transaction_repository).to receive(:current_balance).and_return(0, 1000)
-
-    subject.deposit(1000, Date.new(2012, 1, 10))
-    subject.deposit(2000, Date.new(2012, 1, 13))
-  end
-
   it "can withdraw less than the balance" do
     withdrawal = instance_double(Transaction)
     allow(transaction_repository).to receive(:create)
