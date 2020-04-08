@@ -1,4 +1,4 @@
-require "transaction"
+require_relative "transaction"
 
 class TransactionRepository
   def initialize(transaction_class = Transaction, transactions = [])
