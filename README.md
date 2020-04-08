@@ -82,3 +82,8 @@ The [bank account feature test](./spec/features/bank_account_spec.rb) satisfies 
 A class diagram was drawn to model the domain in the [DotUML Playground](https://dotuml.com/playground.html).
 
 ![class diagram](./docs/class_diagram.png)
+
+- `Account` provides the public interface for deposit, withdrawl and printing the statment.
+- `TransactionRepository` stores transactions in memory.
+- `Transaction` is a read-only data object that represents one transaction.
+- `StatementPrinter` formats and prints a list of transactions.
