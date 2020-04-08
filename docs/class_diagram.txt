@@ -5,27 +5,36 @@
 
 ClassDiagram [frame=true framecolor=steelblue label="Bank"] {
   class Account {
-	  private statement_printer: StatementPrinter
-		private transaction_class: Transaction
-    private transactions: Array
+	  private statement_printer
+		private transaction_repository
 
-	  public deposit(amount:Integer, date: Date)
-	  public withdraw(amount:Integer, date: Date)
+	  public deposit(amount, date)
+	  public withdraw(amount, date)
 	  public print_statement()
   }
 
-  class Transaction {
-    public date: Date
-	  public credit: Integer
-    public debit: Integer
-    public balance: Integer
-  }
-
   class StatementPrinter {
-    public print(transactions: Array)
+    public print(transactions)
   }
 
-  Account "  1" --> "
-*" Transaction;
+  class TransactionRepository {
+  	private transactions
+
+    public all()
+    public create(date, credit, debit, balance)
+    public current_balance()
+  }
+
+  class Transaction {
+    public date
+	  public credit
+    public debit
+    public balance
+  }
+
+  Account --> TransactionRepository;
 	Account --> StatementPrinter;
+  TransactionRepository "
+ 1" --> "
+*" Transaction;
 }
