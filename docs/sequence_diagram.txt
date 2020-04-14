@@ -1,0 +1,33 @@
+SequenceDiagram [frame=true framecolor=steelblue label="Deposit and print statement"] {
+  actor User
+  lifeline Account
+  lifeline "TransactionRepository" as Repo
+  lifeline "StatementPrinter" as Printer
+
+  User --> Account "deposit(1000, 10-01-2012)"
+  activate Account
+  Account --> Repo "current_balance()"
+  activate Repo
+  Account <-r- Repo "0"
+	deactivate Repo
+  Account --> Repo "create(credit: 1000, date: 10-01-2012, balance: 1000)"
+  activate Repo
+  Account <-r- Repo "transaction"
+  deactivate Repo
+  User <-r- Account "transaction"
+  deactivate Account
+
+  User --> Account "print_statement()"
+	activate Account
+	Account --> Repo "all()"
+	activate Repo
+  Account <-r- Repo "transactions"
+  deactivate Repo
+  Account --> Printer "print_statement(transactions)"
+  activate Printer
+	note right of Printer "print to STDOUT"
+  Account <-r- Printer "nil"
+  deactivate Printer
+  User <-r- Account "nil"
+  deactivate Account
+}

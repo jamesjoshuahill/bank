@@ -79,7 +79,9 @@ The [bank account feature test](./spec/features/bank_account_spec.rb) satisfies 
 
 ## Domain model
 
-A class diagram was drawn to model the domain in the [DotUML Playground](https://dotuml.com/playground.html).
+### Objects
+
+A class diagram was drawn to model the objects in the domain using [DotUML Playground](https://dotuml.com/playground.html).
 
 ![class diagram](./docs/class_diagram.png)
 
@@ -87,3 +89,9 @@ A class diagram was drawn to model the domain in the [DotUML Playground](https:/
 - `TransactionRepository` stores transactions in memory.
 - `Transaction` is a read-only data object that represents one transaction.
 - `StatementPrinter` formats and prints a list of transactions.
+
+### Interactions
+
+This sequence diagram shows the interactions to make a deposit and print the statement.
+
+![sequence diagram](./docs/sequence_diagram.png)
